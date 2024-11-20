@@ -23,8 +23,9 @@ FieldLayout.propTypes = {
 };
 export const Fields = (props) => {
 	let fi = props.fields;
-	let pl = props.currentPlayer;
+	let cp = props.currentPlayer;
 	let ge = props.isGameEnded;
+	let isd = props.isDraw;
 	let sge = props.setGameEnded;
 	let scp = props.setCurrentPlayer;
 	let sid = props.setIsDraw;
@@ -40,15 +41,17 @@ export const Fields = (props) => {
 	];
 
 	const handleStep = (event) => {
-		if (!ge && event.target.textContent === '-') {
-			event.target.textContent = pl;
-			fi[event.target.outerHTML[13]] = pl;
+		if (!isd && !ge && event.target.textContent === '-') {
+			fi[event.target.outerHTML[13]] = cp;
 		}
 
-		if (win.find((it) => pl === fi[it[0]] && pl === fi[it[1]] && pl === fi[it[2]]))
-			sge(true);
-		if (!fi.includes('-')) sid(true);
-		if (pl === '0') scp('X');
+		win.find((it) => cp === fi[it[0]] && cp === fi[it[1]] && cp === fi[it[2]])
+			? sge(true)
+			: !fi.includes('-')
+				? sid(true)
+				: cp === '0'
+					? scp('X')
+					: scp('0');
 	};
 
 	return <FieldLayout fields={fi} handleStep={handleStep} />;

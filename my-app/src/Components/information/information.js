@@ -9,9 +9,20 @@ InformationLayout.propTypes = {
 };
 
 export const Information = (props) => {
-	let message = props.message;
+	let isd = props.isDraw;
+	let ge = props.isGameEnded;
+	let cp = props.currentPlayer;
+	let message = '';
+
+	isd
+		? (message = 'Ничья')
+		: ge
+			? (message = `Победа: ${cp}`)
+			: (message = `Ходит: ${cp}`);
 	return <InformationLayout message={message} />;
 };
 Information.propTypes = {
-	message: PropTypes.string,
+	isDraw: PropTypes.bool,
+	isGameEnded: PropTypes.bool,
+	currentPlayer: PropTypes.string,
 };

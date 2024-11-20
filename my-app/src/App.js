@@ -4,10 +4,10 @@ import styles from './App.module.css';
 import { useState } from 'react';
 
 const GameLayout = ({
-	message,
 	fields,
 	currentPlayer,
 	isGameEnded,
+	isDraw,
 	setGameEnded,
 	setCurrentPlayer,
 	setIsDraw,
@@ -15,11 +15,16 @@ const GameLayout = ({
 }) => (
 	<div className={styles.App}>
 		<h2>Крестики-нолики</h2>
-		<Information message={message} />
+		<Information
+			isDraw={isDraw}
+			isGameEnded={isGameEnded}
+			currentPlayer={currentPlayer}
+		/>
 		<Fields
 			fields={fields}
 			currentPlayer={currentPlayer}
 			isGameEnded={isGameEnded}
+			isDraw={isDraw}
 			setGameEnded={setGameEnded}
 			setCurrentPlayer={setCurrentPlayer}
 			setIsDraw={setIsDraw}
@@ -33,21 +38,13 @@ function Game() {
 	const [currentPlayer, setCurrentPlayer] = useState('X');
 	const [isGameEnded, setGameEnded] = useState(false);
 	const [isDraw, setIsDraw] = useState(false);
-	let fields = new Array(9).fill('-');
+	const [fields, setFields] = useState(new Array(9).fill('-'));
 	const handleAgain = () => {
 		setIsDraw(false);
 		setGameEnded(false);
 		setCurrentPlayer('X');
-		// fields = new Array(9).fill('-');
+		setFields(new Array(9).fill('-'));
 	};
-	let message = 'А кто ходит?';
-	console.log('game', fields);
-
-	isDraw
-		? (message = 'Ничья')
-		: isGameEnded
-			? (message = `Победа: ${currentPlayer}`)
-			: (message = `Ходит: ${currentPlayer}`);
 
 	return (
 		<GameLayout
@@ -56,8 +53,8 @@ function Game() {
 			setCurrentPlayer={setCurrentPlayer}
 			handleAgain={handleAgain}
 			isGameEnded={isGameEnded}
+			isDraw={isDraw}
 			currentPlayer={currentPlayer}
-			message={message}
 			fields={fields}
 		/>
 	);
