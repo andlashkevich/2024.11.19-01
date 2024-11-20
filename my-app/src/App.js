@@ -38,12 +38,12 @@ function Game() {
 	const [currentPlayer, setCurrentPlayer] = useState('X');
 	const [isGameEnded, setGameEnded] = useState(false);
 	const [isDraw, setIsDraw] = useState(false);
-	const [fields, setFields] = useState(new Array(9).fill('-'));
+	const [fields, setFields] = useState(new Array(9).fill(' '));
 	const handleAgain = () => {
 		setIsDraw(false);
 		setGameEnded(false);
 		setCurrentPlayer('X');
-		setFields(new Array(9).fill('-'));
+		setFields(new Array(9).fill(' '));
 	};
 
 	return (

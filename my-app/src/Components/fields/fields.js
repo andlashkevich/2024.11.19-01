@@ -41,13 +41,13 @@ export const Fields = (props) => {
 	];
 
 	const handleStep = (event) => {
-		if (!isd && !ge && event.target.textContent === '-') {
+		if (!isd && !ge && event.target.textContent === ' ') {
 			fi[event.target.outerHTML[13]] = cp;
 		}
 
 		win.find((it) => cp === fi[it[0]] && cp === fi[it[1]] && cp === fi[it[2]])
 			? sge(true)
-			: !fi.includes('-')
+			: !fi.includes(' ')
 				? sid(true)
 				: cp === '0'
 					? scp('X')
