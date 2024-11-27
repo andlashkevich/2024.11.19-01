@@ -5,12 +5,7 @@ const FieldLayout = ({ fields, handleStep }) => (
 	<div className={styles.container}>
 		{fields.map((it, id) => {
 			return (
-				<button
-					ind={id}
-					key={String(Date.now()) + String(Math.random())}
-					className={styles.button}
-					onClick={handleStep}
-				>
+				<button ind={id} key={id} className={styles.button} onClick={handleStep}>
 					{it}
 				</button>
 			);
@@ -43,6 +38,7 @@ export const Fields = (props) => {
 	const handleStep = (event) => {
 		if (!isd && !ge && event.target.textContent === ' ') {
 			fi[event.target.outerHTML[13]] = cp;
+			console.log(event.target.key);
 		}
 
 		win.find((it) => cp === fi[it[0]] && cp === fi[it[1]] && cp === fi[it[2]])
